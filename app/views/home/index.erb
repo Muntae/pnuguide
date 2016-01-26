@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="nav nav-pills"  style="margin: 20px">
+        <li role="presentation" class="active"><a href="https://pnuguide-muntae.c9users.io/home/index">홈</a></li>
+        <li role="presentation"><a href="https://pnuguide-muntae.c9users.io/home/registration">등록하기</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-lg-8" id="map" style='min-width: 320px; max-width: 780px; min-height: 480px;'>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <div class="list-group">
+        <% @list_out.each do |x| %>
+          <a href="/home/info/<%= x.id %>"><button type="button" class="list-group-item"><%= x.storeName %></button></a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var map;
+  var marker;
+  
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.231698, lng: 129.084239},
+      zoom: 17
+    });
+    <% @list_out.each do |x| %>
+      var myLatLng<%= x.id %> = {lat: <%= x.latclicked %>, lng: <%= x.lngclicked %>};
+      marker<%= x.id %> = new google.maps.Marker({
+      position: myLatLng<%= x.id %>,
+      map: map,
+      url: '/home/info/<%= x.id %>'
+      });
+      google.maps.event.addListener(marker<%= x.id %>, 'click', function() {
+        window.location.href = this.url;  //changed from markers[i] to this
+      });
+    <% end %>
+  }
+  
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYRuubkq5UF7ET-oZkwRmKbMqD3j7rgvg&callback=initMap">
+</script>
+
+

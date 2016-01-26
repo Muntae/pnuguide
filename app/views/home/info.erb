@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="nav nav-pills"  style="margin: 20px">
+        <li role="presentation" class="active"><a href="https://pnuguide-muntae.c9users.io/">홈</a></li>
+        <li role="presentation"><a href="https://pnuguide-muntae.c9users.io/home/registration">등록하기</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-8 col-lg-8" id="map" style='min-width: 320px; max-width: 780px; min-height: 480px;'>
+    </div>
+    <div class="col-md-4">
+      <div>
+          이름 : <%= @info_out.storeName %> <br>
+          종류 : <%= @info_out.storeMenu %> <br>
+          최저금액 : <%= @info_out.leastPrice %> <br>
+          최고금액 : <%= @info_out.mostPrice %> <br>
+          전화번호 : <%= @info_out.phoneNumber %> <br>
+          운영시간 : <%= @info_out.runningTime %> <br>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var map;
+  var myLatLng = {lat: <%= @info_out.latclicked %>, lng: <%= @info_out.lngclicked %>};
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      zoom: 17
+    });
+    var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+  }
+  
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYRuubkq5UF7ET-oZkwRmKbMqD3j7rgvg&callback=initMap">
+</script>

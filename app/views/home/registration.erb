@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="nav nav-pills"  style="margin: 20px">
+        <li role="presentation"><a href="https://pnuguide-muntae.c9users.io/">홈</a></li>
+        <li role="presentation" class="active"><a href="https://pnuguide-muntae.c9users.io/home/registration">등록하기</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  <div id="map" style="width:500px; height:500px;"></div>
+    <div class="col-md-4">
+      <form action="/home/write" method="POST">
+        <input type="hidden" name="store_id" value="">
+        이름 : <input type="text" name="storeName"> <br>
+        종류 : <input type="text" name="storeMenu"> <br>
+        최저금액 : <input type="text" name="leastPrice"> <br>
+        최고금액 : <input type="text" name="mostPrice"> <br>
+        전화번호 : <input type="tel" name="phoneNumber"> <br>
+        운영시간 : <input type="text" name="runningTime"> <br>
+        <input type="hidden" name="latclicked" id="latclicked"><input type="hidden" name="lngclicked" id="lngclicked">
+        <input type="submit" value="등록">
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  var latlng = {lat: latclicked, lng: lngclicked};
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.231698, lng: 129.084239},
+      zoom: 17
+    });
+    
+    google.maps.event.addListener(map,'click',function(event) { 
+      document.getElementById('latclicked').value = event.latLng.lat()
+      document.getElementById('lngclicked').value = event.latLng.lng()
+    });
+    google.maps.event.addListener(map, 'click', function(event) {
+      placeMarker(event.latLng);
+    });
+
+    function placeMarker(latlng) {
+      var marker = new google.maps.Marker({
+          position: latlng, 
+          map: map
+      });
+    }
+  }
+</script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYRuubkq5UF7ET-oZkwRmKbMqD3j7rgvg&callback=initMap">
+</script>
