@@ -15,14 +15,21 @@
   <div class="col-md-8 col-lg-8" id="map" style='min-width: 320px; max-width: 780px; min-height: 480px;'>
     </div>
     <div class="col-md-4">
-      <div>
-          이름 : <%= @info_out.storeName %> <br>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= @info_out.storeName %> <br></h3>
+        </div>
+        <div class="panel-body">
           종류 : <%= @info_out.storeMenu %> <br>
           최저금액 : <%= @info_out.leastPrice %> <br>
           최고금액 : <%= @info_out.mostPrice %> <br>
           전화번호 : <%= @info_out.phoneNumber %> <br>
           운영시간 : <%= @info_out.runningTime %> <br>
+        </div>
       </div>
+          
+          
+      
     </div>
   </div>
 </div>
@@ -39,8 +46,11 @@
     map: map,
     title: 'Hello World!'
   });
+  marker.addListener('click', toggleBounce);
   }
-  
+  function toggleBounce() {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
 </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYRuubkq5UF7ET-oZkwRmKbMqD3j7rgvg&callback=initMap">

@@ -38,15 +38,17 @@
       var myLatLng<%= x.id %> = {lat: <%= x.latclicked %>, lng: <%= x.lngclicked %>};
       marker<%= x.id %> = new google.maps.Marker({
       position: myLatLng<%= x.id %>,
+      animation: google.maps.Animation.DROP,
       map: map,
       url: '/home/info/<%= x.id %>'
       });
       google.maps.event.addListener(marker<%= x.id %>, 'click', function() {
-        window.location.href = this.url;  //changed from markers[i] to this
+        window.location.href = this.url;
       });
     <% end %>
+      
   }
-  
+
 </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYRuubkq5UF7ET-oZkwRmKbMqD3j7rgvg&callback=initMap">
